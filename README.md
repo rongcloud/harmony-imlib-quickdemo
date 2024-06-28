@@ -21,17 +21,18 @@
 - [注册融云开发者账号](https://console.rongcloud.cn/agile/register)。注册成功后，控制台会默认自动创建您的首个应用，默认生成**开发**环境下的 App Key，使用国内数据中心。
 - 获取开发环境的应用 [App Key](https://console.rongcloud.cn/agile/formwork/app/appService)
 
-    :::tip
-
-    每个应用具有两个不同的 App Key，分别对应**开发**环境与**生产**环境，两个环境之间数据隔离。在您的应用正式上线前，可切换到使用**生产**环境的 App Key，以便上线前进行测试和最终发布。
-    :::
+    
+```
+    每个应用具有两个不同的 App Key，分别对应 开发 环境与 生产 环境，两个环境之间数据隔离。在您的应用正式上线前，可切换到使用 生产 环境的 App Key，以便上线前进行测试和最终发布。
+```
+    
 - [创建鸿蒙应用]
 
 ## 2.2. 获取融云 AppKey 和 token
 
 进入 [融云管理后台](https://console.rongcloud.cn/agile/formwork/app/appService) 获取 AppKey 
 
-北极星 > IM > Server API 调试 中获取 token
+管理后台 **北极星 > IM > Server API 调试** 中获取 token
 
 
 # 3. Demo 使用
@@ -131,15 +132,15 @@ entry/oh-package.json5 中点击 **Sync Now** 同步工程。
 
 详情请参考[鸿蒙应用权限配置]文档。 
 
-# 5. 接口调用
+# 5. 更多接口调用
 
-[融云鸿蒙文档]已上线
+参考：[融云鸿蒙文档]
 
-更多的接口调用参考接口文档[API文档](./docs/API_Reference.md)
+参考[API文档](./docs/API_Reference.md)
 
 # 6. 问题反馈
 
-如果您在使用过程中，有任何疑问都可以直接在融云官网进行咨询。
+如果您在使用过程中，有任何疑问都可以直接在融云官网提工单进行咨询。
 
 
 <!-- link -->
