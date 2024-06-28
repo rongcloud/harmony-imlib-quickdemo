@@ -3,6 +3,7 @@ import App from '@system.app';
 import { promptAction } from '@kit.ArkUI';
 import {
   AreaCode,
+  ConnectionStatus,
   ConversationIdentifier,
   ConversationType,
   EngineError,
@@ -13,6 +14,7 @@ import {
   ReceivedInfo,
   TextMessage
 } from '@rongcloud/imlib';
+import hilog from '@ohos.hilog';
 
 @Entry
 @Component
@@ -38,7 +40,7 @@ struct Index {
         margin(10).
         fontWeight(FontWeight.Bold).
         onClick(() => {
-          this.connect();
+          this.sendMessage();
         })
     }.height('100%').width('100%')
   }
@@ -57,7 +59,8 @@ struct Index {
 
     // 接收消息回调
     IMEngine.getInstance().setMessageReceivedListener((msg: Message, info: ReceivedInfo) => {
-
+      hilog.info(0x0000, 'IM-App', 'setMessageReceivedListener msg:%{public}s info:%{public}s', JSON.stringify(msg),
+        JSON.stringify(info));
     })
   }
 
@@ -67,10 +70,15 @@ struct Index {
       promptAction.showToast({ message: "初始化失败：token 为空", duration: 1000 })
     }
 
+    IMEngine.getInstance().setConnectionStatusListener((status: ConnectionStatus) => {
+      hilog.info(0x0000, 'IM-App', 'setConnectionStatusListener onChanged status:%{public}d', status);
+    });
+
     IMEngine.getInstance().connect(token, 10).then(result => {
       if (EngineError.Success === result.code) {
         // 连接成功
         let userId = result.userId;
+        hilog.info(0x0000, 'IM-App', 'connect success:%{public}s', userId);
         return;
       }
 
@@ -101,6 +109,7 @@ struct Index {
 
     IMEngine.getInstance().sendMessage(msg, option, (message: Message) => {
       // 消息入库回调
+      hilog.info(0x0000, 'IM-App', 'sendMessage db msg:%{public}s', JSON.stringify(message));
     }).then(result => {
       // 消息发送结果回调
       if (EngineError.Success !== result.code) {
@@ -109,6 +118,7 @@ struct Index {
       }
       // 发送消息成功，获取消息对象
       let message = result.data as Message;
+      hilog.info(0x0000, 'IM-App', 'sendMessage success msg:%{public}s', JSON.stringify(message));
     });
 
   }
